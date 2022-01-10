@@ -1,4 +1,4 @@
-# BroadcastSystem
+# BroadcastSystem Qurre
 A plugin that after a while accidentally shows Broadcast.
 ## Description
 A fairly simple plugin that allows you to configure auto broadcasts.
