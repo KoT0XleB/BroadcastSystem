@@ -17,7 +17,7 @@ namespace BroadcastSystem
 {
     public class BroadcastSystem : Plugin
     {
-        public override string Developer => "KoToXleB#4663";
+        public override string Developer => "KoT0XleB#4663";
         public override string Name => "BroadcastSystem";
         public override Version Version => new Version(1, 0, 1);
         public override int Priority => int.MinValue;
