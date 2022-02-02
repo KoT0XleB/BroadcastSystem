@@ -1,4 +1,4 @@
-﻿using MEC;
+using MEC;
 using Qurre;
 using Qurre.API;
 using Qurre.Events;
@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Round = Qurre.API.Round;
 using Map = Qurre.API.Map;
+using Random = UnityEngine.Random;
+using Server = Qurre.API.Server;
 
 namespace BroadcastSystem
 {
@@ -17,7 +19,7 @@ namespace BroadcastSystem
     {
         public override string Developer => "KoToXleB#4663";
         public override string Name => "BroadcastSystem";
-        public override Version Version => new Version(1, 0, 0);
+        public override Version Version => new Version(1, 0, 1);
         public override int Priority => int.MinValue;
         public override void Enable() => RegisterEvents();
         public override void Disable() => UnregisterEvents();
@@ -51,17 +53,19 @@ namespace BroadcastSystem
         {
             while (!Round.Ended || CustomConfig.BroadcastMessages.Count > 0)
             {
-                int randomValue = UnityEngine.Random.Range(0, CustomConfig.BroadcastMessages.Count);
-                Map.Broadcast($"{CustomConfig.BroadcastMessages[randomValue]}", 10);
+                int randomValue = Random.Range(0, CustomConfig.BroadcastMessages.Count);
+                Map.Broadcast($"{CustomConfig.BroadcastMessages[randomValue]}", CustomConfig.BroadcastLongSeconds);
                 CustomConfig.BroadcastMessages.Remove(CustomConfig.BroadcastMessages[randomValue]);
 
                 yield return Timing.WaitForSeconds(CustomConfig.BroadcastMinutes * 60f);
             }
             yield break;
         }
-        public static void PlayerJoin(JoinEvent ev)
+        public void PlayerJoin(JoinEvent ev)
         {
-            ev.Player.Broadcast($"<color=yellow>{CustomConfig.Hello}</color> <color=red>{ev.Player.Nickname}</color> <color=yellow>{CustomConfig.Text}</color>\n<b>{Qurre.API.Server.Name}</b>", 7);
+            string Message = CustomConfig.Text;
+            Message = Message.Replace("%player%", ev.Player.Nickname);
+            ev.Player.Broadcast(Message, CustomConfig.BroadcastLongSeconds);
         }
     }
 }
