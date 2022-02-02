@@ -1,7 +1,6 @@
 # BroadcastSystem Qurre
-A plugin that after a while accidentally shows Broadcast.
-Плагин, который через некоторое время случайно показывает трансляцию.
-## Description
+## A plugin that after a while accidentally shows Broadcast.
+## Плагин, который через некоторое время случайно показывает трансляцию.
 A fairly simple plugin that allows you to configure auto broadcasts.
 They will not be repeated and will randomly change.
 It is better to use a lot of broadcast.
